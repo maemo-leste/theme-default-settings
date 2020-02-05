@@ -1,0 +1,36 @@
+#!/bin/sh -e
+
+target_theme='/usr/share/themes/alpha'
+
+# Check the exsitance of target theme
+if [ ! -e $target_theme ]; then
+  echo "There is no theme named as $target_theme!"
+  exit 0
+fi
+
+# Quit if target theme already symbolic linked
+if [ $target_theme -ef '/usr/share/themes/default' ]; then
+  echo "$target_theme is alread default theme"
+  exit 0
+fi
+
+# Remove the existing symlink if it exists
+if [ -h '/usr/share/themes/default' ]; then
+  echo "remove current 'default' theme symbolic link"
+  rm -f '/usr/share/themes/default'
+fi
+
+# Force a symlink to default theme
+echo "force 'default' symlink to $target_theme"
+ln -sf $target_theme '/usr/share/themes/default'
+
+# If the user setting does not exist, also create a symlink in /etc
+if [ ! -h '/etc/hildon/theme' ]; then
+  echo "Creating symlink '/etc/hildon/theme' => '/usr/share/themes/default'"
+  if [ ! -d '/etc/hildon' ]; then
+    mkdir '/etc/hildon'
+  fi
+  ln -s "/usr/share/themes/default" '/etc/hildon/theme'
+fi
+
+exit 0

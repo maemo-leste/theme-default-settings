@@ -1,0 +1,11 @@
+Source: theme-default-settings
+Section: misc
+Priority: optional
+Maintainer: Ivan J. <parazyd@dyne.org>
+Build-Depends: debhelper (>= 10)
+Standards-Version: 4.3.0
+
+Package: theme-default-settings
+Architecture: all
+Depends: hildon-theme-alpha
+Description: Hildon theme definition
