@@ -8,4 +8,5 @@ Standards-Version: 4.3.0
 Package: theme-default-settings
 Architecture: all
 Depends: hildon-theme-alpha
+Provides: theme-default-settings, theme-config
 Description: Hildon theme definition
